@@ -1,0 +1,5 @@
+config.ini
+*.bat
+dist/*
+download/*
+*.txt
