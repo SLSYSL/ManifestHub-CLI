@@ -205,6 +205,7 @@ func DownloadDepotkeys() (map[string]string, error) {
 
 		// 下载完成返回
 		fmt.Printf("成功从源 #%d 下载 depotkeys.json (%d个条目)\n", i+1, len(depotkeys))
+		fmt.Println(Division)
 		return depotkeys, nil
 	}
 
@@ -239,10 +240,12 @@ func PatchDepotkey(APPID string, data []byte, depotkeys map[string]string) []byt
 		patched := pattern.ReplaceAll(data, []byte(replacement))
 
 		fmt.Println("已修补 DepotKey")
+		fmt.Println(Division)
 		return patched
 	}
 
 	fmt.Printf("未找到需要修补的 addappid(%s)\n", APPID)
+	fmt.Println(Division)
 	return data
 }
 
@@ -446,6 +449,7 @@ func ProcessFile(data []byte) []byte {
 	}
 
 	// 返回
+	fmt.Println(Division)
 	return []byte(builder.String())
 }
 
@@ -494,6 +498,7 @@ func TrySources(APPID string) ([]byte, error) {
 
 		// 下载完成返回
 		fmt.Printf("成功从源 #%d 下载\n", i+1)
+		fmt.Println(Division)
 		return data, nil
 	}
 
@@ -531,6 +536,7 @@ func Download(APPID string, downloadPath string) error {
 	}
 
 	// 下载完成后添加DLC
+	fmt.Println(Division)
 	fmt.Println("开始添加无仓库的DLC...")
 	if err := AddDLC(APPID, fullPath); err != nil {
 		fmt.Printf("添加DLC失败: %v\n", err)
@@ -562,11 +568,13 @@ func main() {
 		fmt.Scanln(&UserAPPID)
 
 		// 显示下载信息
-		fmt.Printf("\n开始下载: %s.lua\n", UserAPPID)
+		fmt.Println(Division)
+		fmt.Printf("开始下载: %s.lua\n", UserAPPID)
 		fmt.Println("尝试以下下载源:")
 		for i, source := range Sources {
 			fmt.Printf(" %d. %s\n", i+1, fmt.Sprintf(source, UserAPPID, UserAPPID))
 		}
+		fmt.Println(Division)
 
 		// 调用下载函数
 		startTime := time.Now()
@@ -574,6 +582,7 @@ func main() {
 			fmt.Printf("下载失败: %v\n", err)
 		}
 
+		fmt.Println(Division)
 		fmt.Printf("耗时: %.2f秒\n", time.Since(startTime).Seconds())
 	}
 }
