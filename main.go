@@ -68,7 +68,7 @@ var DepotkeySources = []string{
 
 // HTTP客户端
 var httpClient = &http.Client{
-	Timeout: 3 * time.Second, // 3秒超时
+	Timeout: 5 * time.Second, // 5秒超时
 }
 
 // 加载配置
